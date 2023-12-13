@@ -17,23 +17,19 @@ public class StatsOperator : MonoBehaviour
 
     private GameObject _player; 
     private PlayerDefinition _playerDefinition;
-
     private EquipManager _equipManager;
     private void Awake()
     {
         Instance = this;
         _player = GameObject.FindGameObjectWithTag("Player");
         _playerDefinition = _player.GetComponent<PlayerDefinition>();
-        _equipManager = EquipManager.Instance;
     }
 
     public void SetCalcStats()
     {
-        _totalATK = _playerDefinition.playerBaseATK + _equipManager.EquipSumATK;
-        _totalDEF = _playerDefinition.playerBaseDEF + _equipManager.EquipSumDEF;
-        _totalHP = _playerDefinition.playerMaxHP + _equipManager.EquipSumHP;
-        _totalSpeed = _playerDefinition.playerBaseSpeed + _equipManager.EquipSumSpeed;
+        _totalATK = _playerDefinition.playerBaseATK + EquipManager.Instance.EquipSumATK;
+        _totalDEF = _playerDefinition.playerBaseDEF + EquipManager.Instance.EquipSumDEF;
+        _totalHP = _playerDefinition.playerMaxHP + EquipManager.Instance.EquipSumHP;
+        _totalSpeed = _playerDefinition.playerBaseSpeed + EquipManager.Instance.EquipSumSpeed;
     }
-
-
 }

@@ -19,8 +19,8 @@ public class EquipManager : MonoBehaviour
     private Dictionary<string, EquipItemData> _equipmentDictionary;
     private void Awake()
     {
-        _equipmentDictionary = new Dictionary<string, EquipItemData>();
         Instance = this;
+        _equipmentDictionary = new Dictionary<string, EquipItemData>();
         equipData.Add("Weapon", null);
         equipData.Add("Armor", null);
     }
