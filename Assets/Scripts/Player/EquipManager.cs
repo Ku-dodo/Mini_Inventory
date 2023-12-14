@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -15,7 +16,7 @@ public class EquipManager : MonoBehaviour
     public int EquipSumDEF { get => _equipSumDef; }
     public int EquipSumHP { get => _equipSumHP; }
     public float EquipSumSpeed { get => _equipSumSpeed; }
-
+   
     private Dictionary<string, EquipItemData> _equipmentDictionary;
     private void Awake()
     {
@@ -27,8 +28,13 @@ public class EquipManager : MonoBehaviour
 
     public void ChangeEquipItem(EquipItemData equipItemData)
     {
-        if (equipItemData.equipType == ItemData.EquipType.Weapon)
+        if (equipItemData == null)
         {
+            _equipmentDictionary["Weapon"] = null;
+        }
+        else if (equipItemData.equipType == ItemData.EquipType.Weapon)
+        {
+            Debug.Log("üũ ");
             _equipmentDictionary["Weapon"] = equipItemData;
         }
         else if (equipItemData.equipType == ItemData.EquipType.Armor)
@@ -47,11 +53,16 @@ public class EquipManager : MonoBehaviour
 
         foreach (var item in _equipmentDictionary)
         {
-            _equipSumAtk += item.Value.equipATK;
-            _equipSumDef += item.Value.equipDEF;
-            _equipSumHP += item.Value.equipHP;
-            _equipSumSpeed += item.Value.equipSpeed;
+            if (item.Value != null)
+            {
+                _equipSumAtk += item.Value.equipATK;
+                _equipSumDef += item.Value.equipDEF;
+                _equipSumHP += item.Value.equipHP;
+                _equipSumSpeed += item.Value.equipSpeed;
+            }
         }
     }
+
+
 
 }

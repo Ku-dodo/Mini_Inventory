@@ -9,22 +9,20 @@ public class InventorySlotModule : MonoBehaviour
     [SerializeField] private Image _equipIcon;
     [SerializeField] private Image _equipMarkIcon;
 
-    public event Action ActionEquipMarkEnable;
-    public event Action ActionEquipMarkDisable;
-
-
-    public void Awake()
+    public event Action ActionFalseEmarker;
+    private void Awake()
     {
         InitSlotImage();
         ActionRefreshSlotIcon += RefreshSlotIcon;
-        ActionEquipMarkEnable += EquipMarkEnable;
-        ActionEquipMarkDisable += EquipMarkDisable;
+    }
+    private void Start()
+    {
+        ActionFalseEmarker += DisableEquipMarker;
     }
     public void InitSlotImage()
     {
         _equipIcon.enabled = false;
         _equipMarkIcon.enabled = false;
-
     }
     private void RefreshSlotIcon()
     {
@@ -42,27 +40,15 @@ public class InventorySlotModule : MonoBehaviour
     {
         ActionRefreshSlotIcon?.Invoke();
     }
-
-    private void EquipMarkEnable()
+    public void CallActionFalseEmarker()
     {
-        _equipMarkIcon.enabled = true;
+        ActionFalseEmarker?.Invoke();
+    }
+    public void DisableEquipMarker()
+    {
+        _equipMarkIcon.enabled = false;
     }
 
-    public void CallEquipMarkEnable()
-    {
-        ActionEquipMarkEnable?.Invoke();
-    }
-
-
-    private void EquipMarkDisable()
-    {
-        _equipMarkIcon.enabled = true;
-    }
-
-    public void CallEquipMarkDisable()
-    {
-        ActionEquipMarkDisable?.Invoke();
-    }
     public void OnDisable()
     {
         ActionRefreshSlotIcon = null;
